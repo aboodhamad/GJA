@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jordan's Premier Competitive Gaming Platform - Join the professional gaming community">
+    <title>Jordan Gaming Arena - Competitive Gaming Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #8b5cf6;
+            --primary-pink: #ec4899;
+            --primary-cyan: #06b6d4;
+            --primary-blue: #3b82f6;
+            --secondary-purple: #a78bfa;
+            --secondary-pink: #f472b6;
+            --dark-space: #0a0a0f;
+            --dark-void: #111118;
+            --dark-matter: #1a1a2e;
+            --dark-nebula: #16213e;
+            --light-star: #e0e7ff;
+            --light-galaxy: #c7d2fe;
+            --font-primary: 'Orbitron', sans-serif;
+            --font-secondary: 'Rajdhani', sans-serif;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background-color: var(--dark-space);
+            color: var(--light-star);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND
+           ============================================ */
+        .galaxy-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+        }
+
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            background: transparent;
+        }
+
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 60px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 50px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 10px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 180px 50px, #eee, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: stars-drift 80s linear infinite;
+            opacity: 0.5;
+        }
+
+        .stars2 {
+            background-image: 
+                radial-gradient(1px 1px at 100px 150px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 200px 200px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 100px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 250px 50px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 300px 300px;
+            animation: stars-drift 120s linear infinite;
+            opacity: 0.4;
+        }
+
+        .stars3 {
+            background-image: 
+                radial-gradient(1px 1px at 150px 100px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 250px 200px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 150px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            animation: stars-drift 180s linear infinite;
+            opacity: 0.3;
+        }
+
+        .nebula {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(139, 92, 246, 0.15), transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.12), transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08), transparent 60%);
+            animation: nebula-pulse 20s ease-in-out infinite;
+        }
+
+        @keyframes stars-drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        @keyframes nebula-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+
+        /* ============================================
+           NAVIGATION BAR
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            transition: var(--transition-normal);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            box-shadow: 0 4px 30px rgba(139, 92, 246, 0.25);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            animation: logo-rotate 30s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+        }
+
+        @keyframes logo-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink), var(--primary-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--light-galaxy);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: var(--transition-fast);
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink));
+            transition: var(--transition-normal);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--light-star);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-secondary,
+        .btn-primary {
+            padding: 0.7rem 1.6rem;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light-star);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 25px rgba(236, 72, 153, 0.4);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--light-star);
+            border-radius: 3px;
+            transition: var(--transition-normal);
+        }
+
+        /* ============================================
+           HERO SECTION WITH 3D PLANET
+           ============================================ */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 2rem 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease-out;
+            z-index: 10;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .title-line {
+            display: block;
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--light-galaxy);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .title-main {
+            display: block;
+            font-family: var(--font-primary);
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-purple) 50%, var(--primary-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--primary-cyan);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--light-galaxy);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero-primary,
+        .btn-hero-secondary {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5);
+        }
+
+        .btn-hero-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light-star);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-cyan);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-family: var(--font-primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--light-galaxy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.25rem;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, var(--primary-purple), transparent);
+        }
+
+        /* ============================================
+           3D PLANET CONTAINER
+           ============================================ */
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #planet-canvas {
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+
+        #planet-canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Floating Info Cards */
+        .floating-card {
+            position: absolute;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: card-float 6s ease-in-out infinite;
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--primary-purple);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.5);
+        }
+
+        .floating-card .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .floating-card .card-text {
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--light-star);
+        }
+
+        .card-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .card-2 {
+            top: 50%;
+            right: 5%;
+            animation-delay: -2s;
+        }
+
+        .card-3 {
+            bottom: 15%;
+            left: 10%;
+            animation-delay: -4s;
+        }
+
+        @keyframes card-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid var(--light-galaxy);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background: var(--primary-purple);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-wheel 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-wheel {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator span {
+            font-size: 0.75rem;
+            color: var(--light-galaxy);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text {
+                order: 1;
+            }
+            
+            .hero-visual {
+                order: 0;
+                height: 450px;
+            }
+            
+            .hero-description {
+                margin: 0 auto 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .title-main {
+                font-size: 2.5rem;
+            }
+
+            .hero-visual {
+                height: 350px;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat-divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 100px 1rem 40px;
+            }
+            
+            .title-line {
+                font-size: 1.1rem;
+            }
+            
+            .title-main {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+            
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="galaxy-background">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="logo-icon">
+                    <circle cx="20" cy="20" r="18" fill="none" stroke="url(#gradient1)" stroke-width="2"/>
+                    <path d="M20 8 L28 20 L20 32 L12 20 Z" fill="url(#gradient2)"/>
+                    <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">JGA</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#competitions" class="nav-link">Competitions</a></li>
+                <li><a href="#testimonials" class="nav-link">Players</a></li>
+                <li><a href="#news" class="nav-link">News</a></li>
+            </ul>
+
+            <div class="nav-buttons">
+                <a class="btn-secondary" href="#">Login</a>
+                <a class="btn-primary" href="#">Sign Up</a>
+            </div>
+
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">Welcome to the</span>
+                    <span class="title-main">Jordan Gaming Arena</span>
+                </h1>
+                <p class="hero-subtitle">منصة الألعاب التنافسية الأولى في الأردن</p>
+                <p class="hero-description">
+                    Join thousands of competitive gamers across Jordan in the ultimate esports platform. 
+                    Compete in tournaments, climb the rankings, and prove you're the best.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-hero-primary">
+                        <span>Start Your Journey</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8L10 0Z"/>
+                        </svg>
+                    </button>
+                    <button class="btn-hero-secondary">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <span>Watch Trailer</span>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">15K+</span>
+                        <span class="stat-label">Active Players</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Daily Matches</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Tournaments</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-icon">🏆</div>
+                    <div class="card-text">Championship Mode</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon">⚔️</div>
+                    <div class="card-text">1v1 Battles</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon">👥</div>
+                    <div class="card-text">Team Matches</div>
+                </div>
+                <canvas id="planet-canvas"></canvas>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ============================================
+        // 3D PLANET SETUP WITH THREE.JS
+        // ============================================
+        
+        const canvas = document.getElementById('planet-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        camera.position.z = 5;
+
+        // ============================================
+        // CREATE GAMING PLANET
+        // ============================================
+        
+        // Main planet
+        const planetGeometry = new THREE.SphereGeometry(1.5, 64, 64);
+        const planetMaterial = new THREE.MeshStandardMaterial({
+            color: 0x1a1a2e,
+            roughness: 0.7,
+            metalness: 0.3,
+            emissive: 0x8b5cf6,
+            emissiveIntensity: 0.2
+        });
+        const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+        scene.add(planet);
+
+        // Add surface details (craters/features)
+        const detailGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const detailMaterial = new THREE.MeshStandardMaterial({
+            color: 0x16213e,
+            roughness: 0.8
+        });
+        
+        for (let i = 0; i < 30; i++) {
+            const detail = new THREE.Mesh(detailGeometry, detailMaterial);
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+            const radius = 1.52;
+            
+            detail.position.x = radius * Math.sin(phi) * Math.cos(theta);
+            detail.position.y = radius * Math.sin(phi) * Math.sin(theta);
+            detail.position.z = radius * Math.cos(phi);
+            detail.scale.set(
+                Math.random() * 0.5 + 0.3,
+                Math.random() * 0.5 + 0.3,
+                Math.random() * 0.5 + 0.3
+            );
+            planet.add(detail);
+        }
+
+        // Glowing atmosphere
+        const atmosphereGeometry = new THREE.SphereGeometry(1.65, 64, 64);
+        const atmosphereMaterial = new THREE.ShaderMaterial({
+            transparent: true,
+            side: THREE.BackSide,
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vNormal;
+                void main() {
+                    float intensity = pow(0.6 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+                    gl_FragColor = vec4(0.54, 0.36, 0.96, 1.0) * intensity;
+                }
+            `
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphere);
+
+        // Orbital rings
+        const ringGroup = new THREE.Group();
+        
+        for (let i = 0; i < 3; i++) {
+            const ringGeometry = new THREE.TorusGeometry(2 + i * 0.3, 0.01, 16, 100);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: i === 0 ? 0x8b5cf6 : i === 1 ? 0xec4899 : 0x06b6d4,
+                transparent: true,
+                opacity: 0.4
+            });
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+            ring.rotation.x = Math.PI / 2 + (i * 0.1);
+            ring.rotation.y = i * 0.15;
+            ringGroup.add(ring);
+        }
+        scene.add(ringGroup);
+
+        // Particle system for stars/energy
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1000;
+        const positions = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            const radius = 3 + Math.random() * 2;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+            
+            positions[i] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[i + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[i + 2] = radius * Math.cos(phi);
+            
+            // Random colors between purple, pink, and cyan
+            const colorChoice = Math.random();
+            if (colorChoice < 0.33) {
+                colors[i] = 0.54; colors[i + 1] = 0.36; colors[i + 2] = 0.96;
+            } else if (colorChoice < 0.66) {
+                colors[i] = 0.93; colors[i + 1] = 0.28; colors[i + 2] = 0.60;
+            } else {
+                colors[i] = 0.02; colors[i + 1] = 0.71; colors[i + 2] = 0.83;
+            }
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        const pointLight1 = new THREE.PointLight(0x8b5cf6, 1, 10);
+        pointLight1.position.set(-3, 2, 3);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xec4899, 1, 10);
+        pointLight2.position.set(3, -2, 3);
+        scene.add(pointLight2);
+
+        // ============================================
+        // MOUSE INTERACTION
+        // ============================================
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+        let isDragging = false;
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            mouseY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            if (!isDragging) {
+                targetRotationX = mouseY * 0.3;
+                targetRotationY = mouseX * 0.3;
+            }
+        });
+
+        canvas.addEventListener('mousedown', () => {
+            isDragging = true;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        canvas.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            isDragging = true;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                const deltaX = (e.touches[0].clientX - touchStartX) * 0.01;
+                const deltaY = (e.touches[0].clientY - touchStartY) * 0.01;
+                targetRotationY += deltaX;
+                targetRotationX += deltaY;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // ============================================
+        // ANIMATION LOOP
+        // ============================================
+        
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const elapsedTime = clock.getElapsedTime();
+
+            // Auto-rotate planet
+            if (!isDragging) {
+                planet.rotation.y += 0.002;
+            } else {
+                planet.rotation.y += (targetRotationY - planet.rotation.y) * 0.05;
+                planet.rotation.x += (targetRotationX - planet.rotation.x) * 0.05;
+            }
+
+            // Rotate atmosphere slightly faster
+            atmosphere.rotation.y += 0.003;
+
+            // Rotate ring system
+            ringGroup.rotation.y += 0.001;
+            ringGroup.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
+
+            // Animate particles
+            const particlePositions = particles.geometry.attributes.position.array;
+            for (let i = 0; i < particlePositions.length; i += 3) {
+                particlePositions[i + 1] += Math.sin(elapsedTime + i) * 0.001;
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+            particles.rotation.y += 0.0005;
+
+            // Pulse lights
+            pointLight1.intensity = 1 + Math.sin(elapsedTime * 2) * 0.3;
+            pointLight2.intensity = 1 + Math.cos(elapsedTime * 2) * 0.3;
+
+            // Camera slight movement based on mouse
+            if (!isDragging) {
+                camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // ============================================
+        // RESPONSIVE HANDLING
+        // ============================================
+        
+        window.addEventListener('resize', () => {
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+
+        // ============================================
+        // NAVBAR SCROLL EFFECT
+        // ============================================
+        
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                navButtons.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

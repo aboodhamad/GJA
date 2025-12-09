@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jordan Gaming Arena - Verify your account">
+    <title>Verify OTP - Jordan Gaming Arena</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="galaxy-background">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="nebula"></div>
+        <div class="shooting-stars">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="auth-container otp-container">
+        <div class="otp-card">
+            <!-- Back Button -->
+            <a href="login.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Back to Login</span>
+            </a>
+
+            <!-- OTP Icon -->
+            <div class="otp-icon">
+                <div class="icon-circle">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <path d="M9 12l2 2 4-4"></path>
+                    </svg>
+                </div>
+                <div class="icon-pulse"></div>
+            </div>
+
+            <!-- OTP Header -->
+            <div class="otp-header">
+                <h2>Verify Your Email</h2>
+                <p>We've sent a 6-digit verification code to</p>
+                <p class="email-display" id="userEmail">p***r@example.com</p>
+            </div>
+
+            <!-- OTP Form -->
+            <form id="otpForm" class="otp-form" novalidate>
+                <div class="otp-inputs" id="otpInputs">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="one-time-code" data-index="0" autofocus>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" data-index="1">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" data-index="2">
+                    <span class="otp-separator">-</span>
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" data-index="3">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" data-index="4">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" data-index="5">
+                </div>
+                <span class="error-message otp-error" id="otpError"></span>
+
+                <!-- Timer -->
+                <div class="otp-timer">
+                    <div class="timer-circle">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                            <circle class="timer-bg" cx="30" cy="30" r="26" fill="none" stroke-width="4"/>
+                            <circle class="timer-progress" id="timerProgress" cx="30" cy="30" r="26" fill="none" stroke-width="4"/>
+                        </svg>
+                        <span class="timer-text" id="timerText">02:00</span>
+                    </div>
+                    <p class="timer-label">Code expires in</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-submit btn-verify" id="verifyBtn" disabled>
+                    <span class="btn-text">Verify Code</span>
+                    <span class="btn-loader">
+                        <svg class="spinner" viewBox="0 0 50 50">
+                            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
+                    </span>
+                    <span class="btn-success">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </span>
+                </button>
+
+                <!-- Resend Code -->
+                <div class="resend-section">
+                    <p>Didn't receive the code?</p>
+                    <button type="button" class="btn-resend" id="resendBtn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20. 49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        <span>Resend Code</span>
+                    </button>
+                </div>
+
+                <!-- Alternative Options -->
+                <div class="alternative-options">
+                    <button type="button" class="btn-alternative" id="changeEmailBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>Change Email Address</span>
+                    </button>
+                    <button type="button" class="btn-alternative" id="contactSupportBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9. 09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        <span>Contact Support</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <p>For your security, never share this code with anyone. JGA staff will never ask for your verification code.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="success-animation">
+                <div class="success-circle">
+                    <svg class="success-checkmark" width="80" height="80" viewBox="0 0 80 80">
+                        <circle class="checkmark-circle" cx="40" cy="40" r="36" fill="none" stroke-width="4"/>
+                        <path class="checkmark-check" fill="none" stroke-width="4" d="M23 40 L35 52 L57 28"/>
+                    </svg>
+                </div>
+                <div class="success-particles">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <h2>Verification Complete!</h2>
+            <p>Your email has been verified successfully. Welcome to Jordan Gaming Arena!</p>
+            <button class="btn-submit" id="continueBtn">
+                <span class="btn-text">Continue to Dashboard</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
